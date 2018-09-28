@@ -1,0 +1,35 @@
+<!-- toolbar -->
+<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">Add</mat-toolbar>
+
+<form [formGroup]="addForm" novalidate fxLayout="column" fxLayoutAlign="center" style="margin: 2em;">
+  <!-- firstname -->
+  <mat-form-field>
+    <input id="firstname" matInput placeholder="First Name" formControlName="firstname">
+  </mat-form-field>
+  
+  <!-- lastname -->
+  <mat-form-field>
+    <input id="lastname" matInput placeholder="Last Name" formControlName="lastname" required>
+  </mat-form-field>
+  <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)" class="alert">
+    <div *ngIf="lastname.errors.required">
+      Last Name is required.
+    </div>
+  </div>
+
+  <!-- title -->
+  <mat-form-field>
+    <input id="title" matInput placeholder="Title" formControlName="title" required>
+  </mat-form-field>
+  <div *ngIf="title.invalid && (title.dirty || title.touched)" class="alert">
+    <div *ngIf="title.errors.required">
+      Title is required.
+    </div>
+  </div>
+  
+  <!-- submit & cancel -->
+  <div fxLayout="row">
+    <button mat-raised-button color="primary" (click)="onSubmit()" type="submit" [disabled]="addForm.pristine || addForm.status == 'INVALID'">Add</button>
+    <button mat-raised-button color="primary" (click)="goBack()" style="margin-left: 1em;">Cancel</button>
+  </div>
+  </form>

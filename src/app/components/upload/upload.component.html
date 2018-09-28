@@ -1,0 +1,15 @@
+<!-- toolbar -->
+<mat-toolbar color="primary">Image Upload</mat-toolbar>
+
+<img src="http://localhost:3000/images/{{editFields.thumbnail}}" alt="thumbnail" style="margin: 2em;" fxLayout="row">
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="center start" style="margin: 2em;">
+  <div class="form-group">
+    <input type="file" id="bookimage" (change)="onFileChange($event)" #fileInput>
+  </div>
+  <div style="margin-top:2em;">
+    <button type="submit" [disabled]="form.invalid || loading" mat-raised-button color="primary">Submit <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
+    <button type="button" mat-raised-button color="primary" (click)="clearFile()" style="margin-left:1em;">Reset</button>
+    <button mat-raised-button color="primary" (click)="goBack()" style="margin-left: 1em;">Back to List</button>
+  </div>
+</form>

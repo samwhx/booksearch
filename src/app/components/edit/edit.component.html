@@ -1,0 +1,39 @@
+<!-- toolbar -->
+<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">Edit</mat-toolbar>
+
+<img src="http://localhost:3000/images/{{editFields.thumbnail}}" alt="thumbnail" style="margin: 2em;" fxLayout="row">
+
+<button mat-stroked-button color="primary" style="margin-left: 3em; margin-bottom: 3em;" (click)="goUpload()">Upload a new Image!</button>
+
+<form [formGroup]="editForm" novalidate fxLayout="column" fxLayoutAlign="center" style="margin-left: 2em;">
+  <!-- title -->
+  <mat-form-field>
+      <input id="title" matInput placeholder="Title" formControlName="title" required>
+  </mat-form-field>
+  <div *ngIf="title.invalid && (title.dirty || title.touched)" class="alert">
+    <div *ngIf="title.errors.required">
+      Title is required.
+    </div>
+  </div>
+
+  <!-- firstname -->
+  <mat-form-field>
+    <input id="firstname" matInput placeholder="First Name" formControlName="firstname">
+  </mat-form-field>
+  
+  <!-- lastname -->
+  <mat-form-field>
+    <input id="lastname" matInput placeholder="Last Name" formControlName="lastname" required>
+  </mat-form-field>
+  <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)" class="alert">
+    <div *ngIf="lastname.errors.required">
+      Last Name is required.
+    </div>
+  </div>
+
+  <!-- submit & cancel -->
+  <div fxLayout="row">
+    <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" [disabled]="editForm.pristine || editForm.status == 'INVALID'">Update</button>
+    <button mat-raised-button color="primary" (click)="goBack()" style="margin-left: 1em;">Cancel</button>
+  </div>
+  </form>

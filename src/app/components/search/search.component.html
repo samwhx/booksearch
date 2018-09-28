@@ -1,0 +1,86 @@
+<!-- toolbar -->
+<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">Library Book Search
+  <button mat-raised-button color="accent" (click)="goAddPage()"> + Add Book</button>
+</mat-toolbar>
+
+<h2 style="margin-left:1em;">Search by Author name, Title of book, or both Author & Name!</h2>
+<h3 style="margin-left:2em;">You can also search for a particular book if you know its ID!</h3>
+
+<form [formGroup]="searchForm" novalidate fxLayout="column" fxLayoutAlign="center start" style="margin: 2em;">
+<!-- type -->
+<mat-form-field>
+  <mat-select id="type" placeholder="select a type" formControlName="type" required>
+    <mat-option *ngFor="let type of types" [value]="type">
+        {{type}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<div *ngIf="type.invalid && (type.dirty || type.touched)" class="alert">
+  <div *ngIf="type.errors.required">
+    You have to select a type of search!
+  </div>
+</div>
+
+<!-- term -->
+<mat-form-field>
+  <input id="term" matInput placeholder="key in search term" formControlName="term" required>
+</mat-form-field>
+<div *ngIf="term.invalid && (term.dirty || term.touched)" class="alert">
+  <div *ngIf="term.errors.required">
+    You have to enter the text to search for!
+  </div>
+</div>
+
+<!-- submit & reset -->
+<div fxLayout="row">
+  <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" [disabled]="searchForm.pristine || searchForm.status == 'INVALID'">Search</button>
+  <button mat-raised-button color="primary" type="reset" (click)="reset()" [disabled]="searchForm.pristine" style="margin-left: 1em;">Reset</button>
+</div>
+</form>
+
+<table mat-table [dataSource]="books" class="mat-elevation-z8" style="margin-left:1em;" matSort>
+  <!-- id column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+    <td mat-cell *matCellDef="let book"> {{book.id}} </td>
+  </ng-container>
+
+  <!-- thumbnail column -->
+  <ng-container matColumnDef="thumbnail">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Book Image </th>
+    <td mat-cell *matCellDef="let book"> <img src="http://localhost:3000/images/{{book.thumbnail}}" alt="thumbnail" height="100" width="100"> </td>
+  </ng-container>
+
+  <!-- title column -->
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Book Title </th>
+    <td mat-cell *matCellDef="let book"> {{book.title}} </td>
+  </ng-container>
+
+  <!-- fullname column -->
+  <ng-container matColumnDef="fullname">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Author Name </th>
+    <td mat-cell *matCellDef="let book"> {{book.fullname}} </td>
+  </ng-container>
+
+  <!-- edit column -->
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+    <td mat-cell *matCellDef="let book" (click)="goEditPage(book.firstname, book.lastname, book.title, book.thumbnail, book.id)"><button mat-raised-button color="primary">Edit</button></td>
+  </ng-container>
+
+   <!-- delete column -->
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+    <td mat-cell *matCellDef="let book" (click)="deleteBook(book.id)"><button mat-raised-button color="warn">Delete</button></td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-paginator [length]="length"
+              [pageSize]="pageSize"
+              [pageSizeOptions]="pageSizeOptions" 
+              (page)="pageEvent = $event">
+</mat-paginator>
