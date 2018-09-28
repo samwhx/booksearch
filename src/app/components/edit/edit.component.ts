@@ -35,7 +35,6 @@ export class EditComponent implements OnInit {
   }
 
   // validator checks for reactive forms
-  get firstname() { return this.editForm.get('firstname'); }
   get lastname() { return this.editForm.get('lastname'); }
   get title() { return this.editForm.get('title'); }
 

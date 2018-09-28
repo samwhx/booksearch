@@ -22,7 +22,7 @@ export class AddComponent implements OnInit {
   addForm: FormGroup;
   createFormGroup() {
     return new FormGroup({
-    firstname: new FormControl('', Validators.required),
+    firstname: new FormControl(''),
     lastname: new FormControl('', Validators.required),
     title: new FormControl('', Validators.required)
     });
@@ -34,7 +34,6 @@ export class AddComponent implements OnInit {
   }
 
   // validator checks called from html for reactive forms
-  get firstname() { return this.addForm.get('firstname'); }
   get lastname() { return this.addForm.get('lastname'); }
   get title() { return this.addForm.get('title'); }
 
