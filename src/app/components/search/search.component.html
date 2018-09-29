@@ -46,7 +46,7 @@
   <!-- thumbnail column -->
   <ng-container matColumnDef="thumbnail">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Book Image </th>
-    <td mat-cell *matCellDef="let book"> <img src="http://localhost:3000/images/{{book.thumbnail}}" alt="thumbnail" height="100" width="100"> </td>
+    <td mat-cell *matCellDef="let book" (click)="goUpload(book.firstname, book.lastname, book.title, book.thumbnail, book.id)"> <img src="http://localhost:3000/images/{{book.thumbnail}}" alt="thumbnail" height="100" width="100"> </td>
   </ng-container>
 
   <!-- title column -->
@@ -63,13 +63,13 @@
 
   <!-- edit column -->
   <ng-container matColumnDef="edit">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+    <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let book" (click)="goEditPage(book.firstname, book.lastname, book.title, book.thumbnail, book.id)"><button mat-raised-button color="primary">Edit</button></td>
   </ng-container>
 
    <!-- delete column -->
   <ng-container matColumnDef="delete">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header><button mat-raised-button color="accent" (click)="goAddPage()"> + Add Book</button></th>
+    <th mat-header-cell *matHeaderCellDef><button mat-raised-button color="accent" (click)="goAddPage()"> + Add Book</button></th>
     <td mat-cell *matCellDef="let book" (click)="deleteBook(book.id)"><button mat-raised-button color="warn">Delete</button></td>
   </ng-container>
 

@@ -70,12 +70,24 @@ export class SearchComponent implements OnInit {
     this.route.navigate(['/add']);
   }
 
+  // go upload page
+  goUpload(firstname, lastname, title, thumbnail, id) {
+    this.SearchSvc.editDetails = {
+      'firstname' : firstname,
+      'lastname' : lastname,
+      'title' : title,
+      'thumbnail' : thumbnail,
+      'id' : id,
+    };
+    this.route.navigate(['/upload']);
+  }
+
   // delete item
   deleteBook(id) {
-    if (confirm('Are you sure you want to delete this record?')) {
+    if (confirm('Are you sure you want to delete this book?')) {
       this.SearchSvc.deleteBook({'id' : id}).subscribe((results) => {
         console.log('Suscribed Results; ', results);
-        alert('Record Deleted!');
+        alert('Book Deleted!');
         window.location.reload(); // reload as router will not work if it is same page
       });
     }

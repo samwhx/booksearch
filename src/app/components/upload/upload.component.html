@@ -1,7 +1,7 @@
 <!-- toolbar -->
 <mat-toolbar color="primary">Image Upload</mat-toolbar>
 
-<img src="http://localhost:3000/images/{{editFields.thumbnail}}" alt="thumbnail" style="margin: 2em;" fxLayout="row">
+<img src="http://localhost:3000/images/{{editFields.thumbnail}}" alt="thumbnail" style="margin: 2em;" fxLayout="row"  height="450" width="auto">
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="center start" style="margin: 2em;">
   <div class="form-group">

@@ -20,14 +20,14 @@ app.use(cors())
 global.filename = "";
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, '/home/samuel/Workspace/fsf/server/library/server/public/images')
+    cb(null, process.env.UPLOAD_FOLDER)
   },
   filename: function (req, file, cb) {
     console.log(JSON.stringify(file));
-    filename = file.originalname;
     var uploadFileTokens = file.originalname.split('.');
     console.log(uploadFileTokens);
-    cb(null, uploadFileTokens[0] + '.' + uploadFileTokens[uploadFileTokens.length-1])
+    filename = uploadFileTokens[0] + '-' + Date.now() + '.' + uploadFileTokens[uploadFileTokens.length-1];
+    cb(null, filename)
   },
   fieldSize: 20 * 1024 * 1024 // 20MB
 })
