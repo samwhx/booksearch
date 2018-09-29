@@ -26,6 +26,10 @@ import { HttpModule } from '@angular/http';
 import { RoutingModule } from './app.routing';
 import { AddComponent } from './components/add/add.component';
 
+// service worker
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +46,8 @@ import { AddComponent } from './components/add/add.component';
     FlexLayoutModule,
     HttpClientModule,
     HttpModule,
-    RoutingModule
+    RoutingModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [SearchService],
   bootstrap: [AppComponent]
