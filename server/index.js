@@ -36,6 +36,7 @@ var upload = multer({ storage: storage })
 // sql query variables and constants
 const sqlFindAllBooks = "SELECT * FROM books"
 const sqlFindBookbyId = "SELECT * FROM books WHERE id = ?"
+const sqlFindBookbyTitleOnly = "SELECT * FROM books WHERE (title LIKE ?)"
 const sqlFindBookbySearchString = "SELECT * FROM books WHERE (author_firstname LIKE ?) || (author_lastname LIKE ?) || (title LIKE ?)"
 const sqlEditBook = "UPDATE books SET author_firstname = ?, author_lastname= ?, title = ?  WHERE id = ?"
 const sqlAddBook = "INSERT INTO books (author_firstname, author_lastname, title, cover_thumbnail) VALUES (?, ?, ?, ?)"
@@ -79,6 +80,7 @@ var makeQuery = (sql, pool) => {
 // var turned into promise when makeQuery executes
 var findAllBooks = makeQuery(sqlFindAllBooks, pool)
 var findBookbyId = makeQuery(sqlFindBookbyId, pool)
+var findBookbyTitleOnly = makeQuery(sqlFindBookbyTitleOnly, pool)
 var findBookbySearchString = makeQuery(sqlFindBookbySearchString, pool)
 var editBook = makeQuery(sqlEditBook, pool)
 var addBook = makeQuery(sqlAddBook, pool)
@@ -120,6 +122,13 @@ app.get(API_URI + '/books', (req, res) => {
       console.info(error)
       res.status(500).json(error)
     })
+  } else if (!req.query.name.trim()) {
+    findBookbyTitleOnly([req.query.title]).then ((results) => {0      
+      res.json(formatResults(results))
+      }).catch((error) => {
+        console.info(error)
+        res.status(500).json(error)
+      })
   }
   else {
     findBookbySearchString([req.query.name, req.query.name, req.query.title]).then ((results) => {0      
