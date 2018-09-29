@@ -17,7 +17,7 @@ const API_URI = "/api";
 app.use(cors())
 
 // multer
-global.filename = "";
+global.filename = ""; // global variable
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, process.env.UPLOAD_FOLDER)
@@ -33,7 +33,7 @@ var storage = multer.diskStorage({
 })
 var upload = multer({ storage: storage })
 
-// sql
+// sql query variables and constants
 const sqlFindAllBooks = "SELECT * FROM books"
 const sqlFindBookbyId = "SELECT * FROM books WHERE id = ?"
 const sqlFindBookbySearchString = "SELECT * FROM books WHERE (author_firstname LIKE ?) || (author_lastname LIKE ?) || (title LIKE ?)"
@@ -85,6 +85,28 @@ var addBook = makeQuery(sqlAddBook, pool)
 var deleteBook = makeQuery(sqlDeleteBook, pool)
 var uploadPhoto = makeQuery(sqlUploadPhoto, pool)
 
+// format results into default format
+var formatResults = (results) => {
+  let finalResult = []
+  let name = ''
+  results.forEach((element) => {
+    if (element.author_firstname != '') {
+    name = element.author_firstname + ' ' + element.author_lastname
+    } else {
+    name = element.author_lastname
+    }
+    let value = { id: "", fullname: "", title: "", thumbnail: "", firstname: "", lastname: "" }
+    value.id = element.id
+    value.fullname = name
+    value.title = element.title
+    value.thumbnail = element.cover_thumbnail
+    value.firstname = element.author_firstname
+    value.lastname = element.author_lastname
+    finalResult.push(value)
+  })
+  return finalResult
+}
+
 ////////////////////////////////////ROUTES////////////////////////////////////
 // GET all books or search string
 app.get(API_URI + '/books', (req, res) => {
@@ -93,53 +115,15 @@ app.get(API_URI + '/books', (req, res) => {
   console.info('title >>>>>', req.query.title)
   if(!req.query.name.trim() && !req.query.title.trim()){
     findAllBooks().then ((results) => {
-      let finalResult = []
-      let name = ''
-      results.forEach((element) => {
-        if (element.author_firstname != '') {
-        name = element.author_firstname + ' ' + element.author_lastname
-        } else {
-        name = element.author_lastname
-        }
-        let value = { id: "", fullname: "", title: "", thumbnail: "", firstname: "", lastname: "" }
-        value.id = element.id
-        value.fullname = name
-        value.title = element.title
-        value.thumbnail = element.cover_thumbnail
-        value.firstname = element.author_firstname
-        value.lastname = element.author_lastname
-        finalResult.push(value)
-      })
-      console.info('query result to be passed back >>>>> ', finalResult)
-      res.json(finalResult)
+      res.json(formatResults(results))
     }).catch((error) => {
       console.info(error)
       res.status(500).json(error)
     })
   }
   else {
-    findBookbySearchString([req.query.name,
-                            req.query.name,
-                            req.query.title]).then ((results) => {
-      let finalResult = []
-      let name = ''
-      results.forEach((element) => {
-        if (element.author_firstname != '') {
-        name = element.author_firstname + ' ' + element.author_lastname
-        } else {
-        name = element.author_lastname
-        }
-        let value = { id: "", fullname: "", title: "", thumbnail: "", firstname: "", lastname: "" }
-        value.id = element.id
-        value.fullname = name
-        value.title = element.title
-        value.thumbnail = element.cover_thumbnail
-        value.firstname = element.author_firstname
-        value.lastname = element.author_lastname
-        finalResult.push(value)
-      })
-      console.info('query result to be passed back >>>>> ', finalResult)
-      res.json(finalResult)
+    findBookbySearchString([req.query.name, req.query.name, req.query.title]).then ((results) => {0      
+    res.json(formatResults(results))
     }).catch((error) => {
       console.info(error)
       res.status(500).json(error)
@@ -150,26 +134,8 @@ app.get(API_URI + '/books', (req, res) => {
 // GET one book by Id (params)
 app.get(API_URI + '/books/:bookId', (req, res) => {
   console.info('params >>>>>', req.params);
-  findBookbyId([parseInt(req.params.bookId)]).then ((results) => {
-    let finalResult = []
-      let name = ''
-      results.forEach((element) => {
-        if (element.author_firstname != '') {
-        name = element.author_firstname + ' ' + element.author_lastname
-        } else {
-        name = element.author_lastname
-        }
-        let value = { id: "", fullname: "", title: "", thumbnail: "", firstname: "", lastname: "" }
-        value.id = element.id
-        value.fullname = name
-        value.title = element.title
-        value.thumbnail = element.cover_thumbnail
-        value.firstname = element.author_firstname
-        value.lastname = element.author_lastname
-        finalResult.push(value)
-      })
-      console.info('query result to be passed back >>>>> ', finalResult)
-      res.json(finalResult)
+  findBookbyId([parseInt(req.params.bookId)]).then ((results) => { 
+    res.json(formatResults(results))
   }).catch((error) => {
     console.info(error)
     res.status(500).json(error)
