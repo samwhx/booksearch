@@ -2,7 +2,9 @@
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `ng serve` for a dev server.
+
+Navigate to `http://localhost:4200/`.
 
 Fully working with each of the below endpoints at the server side!
 
@@ -10,7 +12,15 @@ Fully working with each of the below endpoints at the server side!
 
 # Server
 
-Navigate to `/server` folder. Run `nodemon` for a dev server (assuming you have nodemon installed). The server will be located at `http://localhost:3000/`, but only the below endpoints will be exposed:
+Navigate to `/server` folder.
+
+Run the `library_books.sql` sql script located inside `/sql_file` to generate your database.
+
+Duplicate the `.env.sample` file and rename it `.env`. Change the details to match your system's DB information and folder locations.
+
+Run `nodemon` for a dev server (assuming you have nodemon installed).
+
+The server will be located at `http://localhost:3000/`, but only the below endpoints will be exposed:
 
 ## Endpoint: '/api/books'
 > Only accepts GET requests.
