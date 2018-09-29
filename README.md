@@ -76,9 +76,9 @@ Returns "message": "Upload ok!" if upload is a success.
 ```
 
 ## Endpoint: '/api/books/edit'
-> Only accepts POST requests.
+> Only accepts PUT requests.
 
-1. Updates firstname, lastname, title.
+1. Updates firstname, lastname, title using id.
 
 ```Bash
 '/api/books/edit'

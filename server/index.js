@@ -180,7 +180,7 @@ app.post(API_URI + '/books/upload', upload.single("bookimage"), (req, res, next)
     res.json({message: "Upload ok!"});
 });
 
-// Update image thumbnail
+// Update image thumbnail using global variable filename stored when multer runs
 app.post(API_URI + '/books/uploadid', bodyParser.json(), bodyParser.urlencoded(), (req, res)=>{
   console.info('body >>>>>', req.body);
   uploadPhoto([filename, req.body.id]).then ((results) => {
