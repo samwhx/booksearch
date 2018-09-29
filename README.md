@@ -1,3 +1,7 @@
+# Now Live!!!
+
+The Live server is on `http://13.229.207.200:3000`. It supports PWA. So you can add it to home screen on your mobile phone.
+
 # Client
 
 ## Development server
