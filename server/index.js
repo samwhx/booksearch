@@ -5,9 +5,6 @@ const mysql = require("mysql") // database
 const cors = require('cors') // cross origin requests
 const multer = require('multer') // image upload
 const bodyParser = require('body-parser') // parse body of post/put messages
-const http = require('http'); // for http connection
-const https = require('https'); // for https connection
-const fs = require('fs'); // filesync to read files
 
 ////////////////////////////////////METHODS////////////////////////////////////
 // express
@@ -217,15 +214,6 @@ app.use(express.static('public'))
 app.use(express.static('public/client'))
 
 ////////////////////////////////////LISTEN////////////////////////////////////
-
-// var ssl = {
-//   key: fs.readFileSync('/etc/letsencrypt/live/samwhx.tk/privkey.pem'),
-//   cert: fs.readFileSync('/etc/letsencrypt/live/samwhx.tk/fullchain.pem'),
-//   ca: fs.readFileSync('/etc/letsencrypt/live/samwhx.tk/chain.pem')
-// }
-
-// http.createServer(app).listen(process.env.APP_PORT || 8000);
-// https.createServer(ssl, app).listen(process.env.PORT || 8443);
 
 const PORT = parseInt(process.argv[2]) || parseInt(process.env.APP_PORT) || 3000
 app.listen(PORT, () => {
