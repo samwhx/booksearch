@@ -35,5 +35,6 @@
   <div fxLayout="row">
     <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" [disabled]="editForm.pristine || editForm.status == 'INVALID'">Update</button>
     <button mat-raised-button color="primary" (click)="goBack()" style="margin-left: 1em;">Cancel</button>
+    <button mat-raised-button color="warn" (click)="deleteBook()" style="margin-left: 1em;">Delete</button>
   </div>
   </form>

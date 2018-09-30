@@ -19,7 +19,7 @@ export class SearchComponent implements OnInit {
   IMG_URL = environment.image_url;
 
   // for table
-  displayedColumns: string[] = ['id', 'thumbnail', 'title', 'fullname', 'edit', 'delete'];
+  displayedColumns: string[] = ['id', 'thumbnail', 'title', 'fullname', 'edit'];
   books = (new MatTableDataSource([]));
   // sort
   @ViewChild(MatSort) sort: MatSort;
@@ -84,17 +84,6 @@ export class SearchComponent implements OnInit {
       'id' : id,
     };
     this.route.navigate(['/upload']);
-  }
-
-  // delete item
-  deleteBook(id) {
-    if (confirm('Are you sure you want to delete this book?')) {
-      this.SearchSvc.deleteBook({'id' : id}).subscribe((results) => {
-        console.log('Suscribed Results; ', results);
-        alert('Book Deleted!');
-        window.location.reload(); // reload as router will not work if it is same page
-      });
-    }
   }
 
   // submit button

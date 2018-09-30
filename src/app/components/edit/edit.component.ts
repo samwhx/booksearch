@@ -59,6 +59,17 @@ export class EditComponent implements OnInit {
     this.route.navigate(['/search']);
   }
 
+  // delete button
+  deleteBook() {
+    if (confirm('Are you sure you want to delete this book?')) {
+      this.SearchSvc.deleteBook({'id' : this.editFields.id}).subscribe((results) => {
+        console.log('Suscribed Results; ', results);
+        alert('Book Deleted!');
+        this.route.navigate(['/search']);
+      });
+    }
+  }
+
   // go upload page
   goUpload() {
     this.route.navigate(['/upload']);
@@ -72,9 +83,9 @@ export class EditComponent implements OnInit {
       lastname: this.SearchSvc.editDetails.lastname,
       // @ts-ignore
       title: this.SearchSvc.editDetails.title
-   });
-   // @ts-ignore
-   this.editFields.thumbnail = this.SearchSvc.editDetails.thumbnail; // for thumbnail loading
+    });
+    // @ts-ignore
+    this.editFields.thumbnail = this.SearchSvc.editDetails.thumbnail; // for thumbnail loading
     // @ts-ignore
     this.editFields.id = this.SearchSvc.editDetails.id; // for sql update purpose
   }

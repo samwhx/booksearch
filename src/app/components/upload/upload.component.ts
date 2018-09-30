@@ -12,10 +12,10 @@ import { environment } from '../../../environments/environment'; // variables fo
 })
 export class UploadComponent implements OnInit {
 
-   // editFields
-   editFields = {
-    'thumbnail': '',
-    'id': ''
+  // editFields
+  editFields = {
+  'thumbnail': '',
+  'id': ''
   };
 
   // image source
