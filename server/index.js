@@ -220,12 +220,12 @@ app.use(express.static('public/client'))
 
 var ssl = {
   key: fs.readFileSync('/etc/letsencrypt/live/samwhx.tk/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/samwhx.tk/fullchain.pem'),
-  ca: fs.readFileSync('/etc/letsencrypt/live/samwhx.tk/chain.pem')
+  cert: fs.readFileSync('/etc/letsencrypt/live/samwhx.tk/fullchain.pem')
+  // ca: fs.readFileSync('/etc/letsencrypt/live/samwhx.tk/chain.pem')
 }
 
-http.createServer(app).listen(process.env.PORT || 8000);
-https.createServer(ssl, app).listen(process.env.PORT || 8443);
+// http.createServer(app).listen(process.env.PORT || 8000);
+https.createServer(ssl, app).listen(process.env.PORT || 443);
 
 // const PORT = parseInt(process.argv[2]) || parseInt(process.env.APP_PORT) || 3000
 // app.listen(PORT, () => {
