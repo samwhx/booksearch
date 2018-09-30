@@ -46,19 +46,19 @@
 
   <!-- thumbnail column -->
   <ng-container matColumnDef="thumbnail">
-    <th mat-header-cell *matHeaderCellDef> Book Image </th>
-    <td mat-cell *matCellDef="let book" (click)="goUpload(book.firstname, book.lastname, book.title, book.thumbnail, book.id)"><img src="{{IMG_URL}}{{book.thumbnail}}" alt="thumbnail" height="40em" width="40em"  style="cursor: pointer;"></td>
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let book"><img src="{{IMG_URL}}{{book.thumbnail}}" alt="thumbnail" height="40em" width="40em"  style="cursor: pointer; vertical-align: middle;" (click)="goUpload(book.firstname, book.lastname, book.title, book.thumbnail, book.id)"></td>
   </ng-container>
 
   <!-- title column -->
   <ng-container matColumnDef="title">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Book Title </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
     <td mat-cell *matCellDef="let book"> {{book.title}} </td>
   </ng-container>
 
   <!-- fullname column -->
   <ng-container matColumnDef="fullname">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Author Name </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Author </th>
     <td mat-cell *matCellDef="let book"> {{book.fullname}} </td>
   </ng-container>
 
