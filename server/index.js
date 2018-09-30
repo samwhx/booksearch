@@ -218,16 +218,16 @@ app.use(express.static('public/client'))
 
 ////////////////////////////////////LISTEN////////////////////////////////////
 
-var ssl = {
-  key: fs.readFileSync('/etc/letsencrypt/live/samwhx.tk/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/samwhx.tk/fullchain.pem')
-  // ca: fs.readFileSync('/etc/letsencrypt/live/samwhx.tk/chain.pem')
-}
+// var ssl = {
+//   key: fs.readFileSync('/etc/letsencrypt/live/samwhx.tk/privkey.pem'),
+//   cert: fs.readFileSync('/etc/letsencrypt/live/samwhx.tk/fullchain.pem'),
+//   ca: fs.readFileSync('/etc/letsencrypt/live/samwhx.tk/chain.pem')
+// }
 
-// http.createServer(app).listen(process.env.PORT || 8000);
-https.createServer(ssl, app).listen(process.env.PORT || 443);
+// http.createServer(app).listen(process.env.APP_PORT || 8000);
+// https.createServer(ssl, app).listen(process.env.PORT || 8443);
 
-// const PORT = parseInt(process.argv[2]) || parseInt(process.env.APP_PORT) || 3000
-// app.listen(PORT, () => {
-//   console.info(`Application started on port ${PORT} on ${new Date()}`)
-// })
+const PORT = parseInt(process.argv[2]) || parseInt(process.env.APP_PORT) || 3000
+app.listen(PORT, () => {
+  console.info(`Application started on port ${PORT} on ${new Date()}`)
+})
