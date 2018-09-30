@@ -71,13 +71,8 @@ export class UploadComponent implements OnInit {
     });
   }
 
-  clearFile() {
-    this.form.get('bookimage').setValue(null);
-    this.fileInput.nativeElement.value = '';
-  }
-
   goBack() {
-    this.route.navigate(['/search']);
+    this.route.navigate(['/edit']);
   }
 
   ngOnInit() {
