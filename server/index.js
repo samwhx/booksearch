@@ -13,6 +13,10 @@ const fs = require('fs'); // filesync to read files
 // express
 const app = express()
 
+// set proxy for nginx to work
+app.set('trust proxy', true);
+app.set('trust proxy', 'loopback');
+
 // api uri to be appended to all api routes.
 const API_URI = "/api";
 
@@ -213,7 +217,17 @@ app.use(express.static('public'))
 app.use(express.static('public/client'))
 
 ////////////////////////////////////LISTEN////////////////////////////////////
-const PORT = parseInt(process.argv[2]) || parseInt(process.env.APP_PORT) || 3000
-app.listen(PORT, () => {
-  console.info(`Application started on port ${PORT} on ${new Date()}`)
-})
+
+var ssl = {
+  key: fs.readFileSync('/etc/letsencrypt/live/samwhx.tk/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/samwhx.tk/fullchain.pem'),
+  ca: fs.readFileSync('/etc/letsencrypt/live/samwhx.tk/chain.pem')
+}
+
+http.createServer(app).listen(process.env.PORT || 8000);
+https.createServer(ssl, app).listen(process.env.PORT || 8443);
+
+// const PORT = parseInt(process.argv[2]) || parseInt(process.env.APP_PORT) || 3000
+// app.listen(PORT, () => {
+//   console.info(`Application started on port ${PORT} on ${new Date()}`)
+// })
