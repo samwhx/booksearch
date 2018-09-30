@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../../services/search.service'; // service
 import { FormGroup, FormControl, Validators } from '@angular/forms'; // reactive forms
 import { Router } from '@angular/router'; // routing
+import { environment } from '../../../environments/environment'; // variables for development/production
 
 @Component({
   selector: 'app-edit',
@@ -18,6 +19,9 @@ export class EditComponent implements OnInit {
     'thumbnail': '',
     'id': '',
   };
+
+  // image source
+  IMG_URL = environment.image_url;
 
   // reactive forms
   editForm: FormGroup;

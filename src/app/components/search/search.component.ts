@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms'; // reactive
 import { SearchService } from '../../services/search.service'; // service
 import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material'; // sort
 import { Router } from '@angular/router'; // routing
+import { environment } from '../../../environments/environment'; // variables for development/production
 
 @Component({
   selector: 'app-search',
@@ -13,6 +14,9 @@ export class SearchComponent implements OnInit {
 
   // list of types for selection
   types = ['Author', 'Title', 'Author & Title', 'ID'];
+
+  // image source
+  IMG_URL = environment.image_url;
 
   // for table
   displayedColumns: string[] = ['id', 'thumbnail', 'title', 'fullname', 'edit', 'delete'];

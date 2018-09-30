@@ -5,6 +5,9 @@ const mysql = require("mysql") // database
 const cors = require('cors') // cross origin requests
 const multer = require('multer') // image upload
 const bodyParser = require('body-parser') // parse body of post/put messages
+const http = require('http'); // for http connection
+const https = require('https'); // for https connection
+const fs = require('fs'); // filesync to read files
 
 ////////////////////////////////////METHODS////////////////////////////////////
 // express
@@ -198,8 +201,16 @@ app.post(API_URI + '/books/uploadid', bodyParser.json(), bodyParser.urlencoded()
   });
 });
 
+// redirect route for /search when user uses refresh within page. (angular cannot detect)
+app.get('/search', (req, res) => {
+  res.redirect('/');
+})
+
 // static assets folder
 app.use(express.static('public'))
+
+// client - split from public as angular prod replace entire contents when building
+app.use(express.static('public/client'))
 
 ////////////////////////////////////LISTEN////////////////////////////////////
 const PORT = parseInt(process.argv[2]) || parseInt(process.env.APP_PORT) || 3000

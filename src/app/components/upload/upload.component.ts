@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SearchService } from '../../services/search.service';
 import { Router } from '@angular/router'; // routing
+import { environment } from '../../../environments/environment'; // variables for development/production
 
 
 @Component({
@@ -16,6 +17,9 @@ export class UploadComponent implements OnInit {
     'thumbnail': '',
     'id': ''
   };
+
+  // image source
+  IMG_URL = environment.image_url;
 
   form: FormGroup;
   loading = false;

@@ -2,6 +2,8 @@
 
 The Live server is on `http://13.229.207.200:3000`. It supports PWA. So you can add it to home screen on your mobile phone.
 
+Run `ng build --prod --base-href=http://13.229.207.200:3000/` to build angular for production.
+
 # Client
 
 ## Development server
