@@ -46,7 +46,7 @@
 
   <!-- thumbnail column -->
   <ng-container matColumnDef="thumbnail">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Book Image </th>
+    <th mat-header-cell *matHeaderCellDef> Book Image </th>
     <td mat-cell *matCellDef="let book" (click)="goUpload(book.firstname, book.lastname, book.title, book.thumbnail, book.id)"><img src="{{IMG_URL}}{{book.thumbnail}}" alt="thumbnail" height="40em" width="40em"  style="cursor: pointer;"></td>
   </ng-container>
 
