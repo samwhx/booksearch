@@ -1,6 +1,6 @@
 # Now Live!!!
 
-The Live server is on `https://samwhx.tk/`. It supports PWA. So you can add it to home screen on your mobile phone.
+The Live server is on https://samwhx.tk/. It supports PWA. So you can add it to home screen on your mobile phone.
 
 # Client
 
