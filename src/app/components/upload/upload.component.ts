@@ -64,7 +64,6 @@ export class UploadComponent implements OnInit {
       alert('Image Uploaded!');
       this.loading = false;
     }, 1000);
-    console.log('.........................', this.editFields.id);
     this.SearchSvc.uploadImageID(this.editFields).subscribe((results) => {
       console.log('Suscribed Results: ', results);
       this.route.navigate(['/search']);
@@ -72,7 +71,7 @@ export class UploadComponent implements OnInit {
   }
 
   goBack() {
-    this.route.navigate(['/edit']);
+    this.route.navigate(['/search']);
   }
 
   ngOnInit() {
