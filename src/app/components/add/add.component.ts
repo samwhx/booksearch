@@ -45,7 +45,7 @@ export class AddComponent implements OnInit {
     this.addFields.title = this.addForm.value.title;
     this.SearchSvc.addBook(this.addFields).subscribe((results) => {
       console.log('Suscribed Results; ', results);
-      alert('Record Added!');
+      alert('Book Added!');
       this.route.navigate(['/search']);
     });
   }
